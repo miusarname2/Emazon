@@ -9,6 +9,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -21,5 +23,10 @@ public class MarcaHandler implements IMarcaHandler{
     @Override
     public MarcaResponse saveMarca(MarcaRequest marcaRequest) {
         return marcaResponseMapper.toResponse(marcaPortService.saveMarca(marcaRequestMapper.toMarca(marcaRequest)));
+    }
+
+    @Override
+    public List<MarcaResponse> listMarca() {
+        return marcaResponseMapper.toResponseList(marcaPortService.listMarca());
     }
 }

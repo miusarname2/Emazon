@@ -6,6 +6,8 @@ import com.pragma.Emazon.infrastructure.output.jpa.mapper.MarcaEntityMapper;
 import com.pragma.Emazon.infrastructure.output.jpa.repository.IMarcaRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 public class MarcaJpaAdapter implements IMarcaPersistence {
 
@@ -15,5 +17,10 @@ public class MarcaJpaAdapter implements IMarcaPersistence {
     @Override
     public Marca saveMarca(Marca marca) {
         return marcaEntityMapper.toMarca(marcaRepository.save(marcaEntityMapper.toEntity(marca)));
+    }
+
+    @Override
+    public List<Marca> listMarca() {
+        return marcaEntityMapper.toMarcaList(marcaRepository.findAll());
     }
 }

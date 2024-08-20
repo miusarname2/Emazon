@@ -8,7 +8,6 @@ import com.pragma.Emazon.domain.usecase.CategoriaUseCase;
 import com.pragma.Emazon.domain.usecase.MarcaUseCase;
 import com.pragma.Emazon.infrastructure.output.jpa.adapter.CategoriaJpaAdapter;
 import com.pragma.Emazon.infrastructure.output.jpa.adapter.MarcaJpaAdapter;
-import com.pragma.Emazon.infrastructure.output.jpa.entity.CategoriaEntity;
 import com.pragma.Emazon.infrastructure.output.jpa.mapper.CategoriaEntityMapper;
 import com.pragma.Emazon.infrastructure.output.jpa.mapper.MarcaEntityMapper;
 import com.pragma.Emazon.infrastructure.output.jpa.repository.ICategoriaRepository;
