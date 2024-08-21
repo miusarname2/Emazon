@@ -12,7 +12,6 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface CategoriaRequestMapper {
 
-    @Mapping(source = "nombre", target = "nombre")
     Categoria toCategoria(CategoriaRequest categoriaRequest);
 
 }
