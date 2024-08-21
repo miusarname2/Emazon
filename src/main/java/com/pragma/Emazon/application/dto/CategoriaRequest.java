@@ -4,10 +4,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.validation.annotation.Validated;
 
 @Getter
-@Validated
 @Setter
 public class CategoriaRequest {
     @Size(min = 1, max = 50, message = "El nombre no puede tener más de 50 caracteres")
