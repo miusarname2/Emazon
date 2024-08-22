@@ -16,6 +16,9 @@ public class MarcaJpaAdapter implements IMarcaPersistence {
 
     @Override
     public Marca saveMarca(Marca marca) {
+        if (marcaRepository.existsByNombre(marca.getNombre())){
+            throw new IllegalArgumentException("Ya existe en la base de datos una marca con ese nombre.");
+        }
         return marcaEntityMapper.toMarca(marcaRepository.save(marcaEntityMapper.toEntity(marca)));
     }
 
