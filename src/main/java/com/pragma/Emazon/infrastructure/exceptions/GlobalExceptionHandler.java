@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         ResponseError errores = new ResponseError();
 
-        errors.put("description",ex.getMessage());
+        errors.put("nombre",ex.getMessage());
         errores.setErrors(errors);
         errores.setStatusCode(409);
 

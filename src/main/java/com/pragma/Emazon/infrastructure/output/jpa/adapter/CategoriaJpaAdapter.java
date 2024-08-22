@@ -19,6 +19,9 @@ public class CategoriaJpaAdapter implements ICategoriaPersistence {
 
     @Override
     public void saveCategoria(Categoria categoria) {
+        if (categoriaRepository.existsByNombre(categoria.getNombre())) {
+            throw new IllegalArgumentException("Ya existe en la base de datos una categoria con ese nombre.");
+        }
         categoriaRepository.save(categoriaEntityMapper.toEntity(categoria));
     }
 
