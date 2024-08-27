@@ -10,4 +10,6 @@ public interface ICategoriaPortService {
 
     List<Categoria> listCategorias();
 
+    Categoria obtenerCategoria(Long id);
+
 }

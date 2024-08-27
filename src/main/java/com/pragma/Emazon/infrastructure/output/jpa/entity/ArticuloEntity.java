@@ -17,11 +17,13 @@ public class ArticuloEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String nombre;
+    private String descripcion;
     private int cantidad;
     private double precio;
     @JoinColumn(name = "id_categoria")
     private Long idCategoria;
-    @JoinColumn(name = "id_marca")
+        @JoinColumn(name = "id_marca")
     private Long idMarca;
 
 }

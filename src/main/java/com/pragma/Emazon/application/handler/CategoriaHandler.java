@@ -30,4 +30,9 @@ public class CategoriaHandler implements ICategoriaHandler{
     public List<CategoriaResponse> listCategoria() {
         return categoriaResponseMapper.toResponseList(categoriaPortService.listCategorias());
     }
+
+    @Override
+    public Categoria obtenerCategoria(Long id) {
+        return categoriaPortService.obtenerCategoria(id);
+    }
 }

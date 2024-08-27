@@ -10,4 +10,6 @@ public interface ICategoriaPersistence {
 
     List<Categoria> listCategorias();
 
+    Categoria obtenerCategoria(Long id);
+
 }

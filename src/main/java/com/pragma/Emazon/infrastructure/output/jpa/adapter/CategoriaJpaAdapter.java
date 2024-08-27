@@ -33,4 +33,9 @@ public class CategoriaJpaAdapter implements ICategoriaPersistence {
         }
         return categoriaEntityMapper.toCategoriaList(categoriaList);
     }
+
+    @Override
+    public Categoria obtenerCategoria(Long id) {
+        return categoriaEntityMapper.toCategoria(categoriaRepository.getById(id));
+    }
 }

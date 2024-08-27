@@ -10,4 +10,6 @@ public interface IMarcaPersistence {
     Marca saveMarca(Marca marca);
 
     List<Marca> listMarca();
+
+    Marca obtenerMarca(Long id);
 }

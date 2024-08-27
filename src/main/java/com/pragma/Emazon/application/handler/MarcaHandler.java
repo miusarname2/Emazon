@@ -5,6 +5,7 @@ import com.pragma.Emazon.application.dto.MarcaResponse;
 import com.pragma.Emazon.application.mapper.MarcaRequestMapper;
 import com.pragma.Emazon.application.mapper.MarcaResponseMapper;
 import com.pragma.Emazon.domain.api.IMarcaPortService;
+import com.pragma.Emazon.domain.model.Marca;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,10 @@ public class MarcaHandler implements IMarcaHandler{
     @Override
     public List<MarcaResponse> listMarca() {
         return marcaResponseMapper.toResponseList(marcaPortService.listMarca());
+    }
+
+    @Override
+    public Marca obtenerMarca(Long id) {
+        return marcaPortService.obtenerMarca(id);
     }
 }

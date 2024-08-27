@@ -8,9 +8,11 @@ import lombok.Setter;
 public class ArticuloResponse {
 
     private Long id;
+    private String nombre;
+    private String descripcion;
     private int cantidad;
     private double precio;
-    private Long idCategoria;
-    private Long idMarca;
+    private CategoriaResponse categoria;
+    private MarcaResponse marca;
 
 }

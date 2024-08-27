@@ -24,4 +24,9 @@ public class MarcaUseCase implements IMarcaPortService {
     public List<Marca> listMarca() {
         return marcaPersistence.listMarca();
     }
+
+    @Override
+    public Marca obtenerMarca(Long id) {
+        return marcaPersistence.obtenerMarca(id);
+    }
 }

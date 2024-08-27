@@ -55,7 +55,7 @@ public class BeanConfiguration {
 
     @Bean
     public IArticuloPersistence articuloPersistencePort(){
-        return new ArticuloJpaAdapter(articuloRepository,articuloEntityMapper);
+        return new ArticuloJpaAdapter(articuloRepository,articuloEntityMapper,marcaRepository,marcaEntityMapper,categoriaRepository,categoriaEntityMapper);
     }
 
     @Bean

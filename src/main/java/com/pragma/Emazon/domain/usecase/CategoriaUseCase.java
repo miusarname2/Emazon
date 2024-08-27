@@ -21,4 +21,9 @@ public class CategoriaUseCase implements ICategoriaPortService {
     public List<Categoria> listCategorias() {
         return categoriaPersistence.listCategorias();
     }
+
+    @Override
+    public Categoria obtenerCategoria(Long id) {
+        return categoriaPersistence.obtenerCategoria(id);
+    }
 }

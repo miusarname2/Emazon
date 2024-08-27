@@ -12,4 +12,6 @@ public interface ICategoriaHandler {
 
     List<CategoriaResponse> listCategoria();
 
+    Categoria obtenerCategoria(Long id);
+
 }
