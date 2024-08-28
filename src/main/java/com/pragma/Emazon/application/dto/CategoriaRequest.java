@@ -1,0 +1,18 @@
+package com.pragma.Emazon.application.dto;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
+
+@Getter
+@Validated
+@Setter
+public class CategoriaRequest {
+    @Size(min = 1, max = 50, message = "El nombre no puede tener más de 50 caracteres")
+    private String nombre;
+
+    @Size(min = 1,max = 90, message = "La descripción no puede superar los 90 caracteres.")
+    private String descripcion;
+}
