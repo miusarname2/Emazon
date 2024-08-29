@@ -8,6 +8,6 @@ public interface ICategoriaPortService {
 
     void saveCategoria(Categoria categoria);
 
-    List<Categoria> listCategorias();
+    List<Categoria> listCategorias(String sortBy, boolean ascending,int page, int size);
 
 }
