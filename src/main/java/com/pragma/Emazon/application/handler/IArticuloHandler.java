@@ -10,5 +10,5 @@ public interface IArticuloHandler {
 
     ArticuloResponse saveArticulo(ArticuloRequest articuloRequest);
 
-    List<ArticuloResponse> listArticulos();
+    List<ArticuloResponse> listArticulos(String sortBy, boolean ascending,int page, int size);
 }

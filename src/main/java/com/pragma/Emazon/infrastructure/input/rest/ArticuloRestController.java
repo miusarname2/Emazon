@@ -41,8 +41,11 @@ public class ArticuloRestController {
             @ApiResponse(responseCode = "404", description = "No data found", content = @Content)
     })
     @GetMapping
-    public ResponseEntity<List<ArticuloResponse>> getAllCategorias(){
-        return ResponseEntity.ok(articuloHandler.listArticulos());
+    public ResponseEntity<List<ArticuloResponse>> getAllCategorias(@RequestParam(value = "sortBy", defaultValue = "nombre") String sortBy,
+                                                                   @RequestParam(value = "ascending", defaultValue = "true") boolean ascending,
+                                                                   @RequestParam(value = "page", defaultValue = "0") int page,
+                                                                   @RequestParam(value = "size", defaultValue = "10") int size){
+        return ResponseEntity.ok(articuloHandler.listArticulos(sortBy, ascending,page,size));
     }
 
 }

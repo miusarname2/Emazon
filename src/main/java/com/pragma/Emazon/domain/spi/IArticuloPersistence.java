@@ -8,5 +8,5 @@ public interface IArticuloPersistence {
 
     Articulo saveArticulo(Articulo articulo);
 
-    List<Articulo> listCategorias();
+    List<Articulo> listCategorias(String sortBy, boolean ascending,int page, int size);
 }

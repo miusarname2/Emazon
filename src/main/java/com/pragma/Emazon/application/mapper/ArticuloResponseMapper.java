@@ -39,9 +39,7 @@ public interface ArticuloResponseMapper {
             ArticuloResponse response = new ArticuloResponse();
 
             // Encontrar la marca correspondiente
-            MarcaResponse marcaResponse = marcaResponses.stream()
-                    .filter(marca -> marca.getId().equals(articulo.getIdMarca()))
-                    .findFirst().orElse(null);
+            MarcaResponse marcaResponse = getMarcaResponse(marcaResponses, articulo);
 
             // Encontrar la categoría correspondiente
             Categoria categoria = categorias.stream()
@@ -69,6 +67,11 @@ public interface ArticuloResponseMapper {
         }).collect(Collectors.toList());
     }
 
+    private static MarcaResponse getMarcaResponse(List<MarcaResponse> marcaResponses, Articulo articulo) {
+        return marcaResponses.stream()
+                .filter(marca -> marca.getId().equals(articulo.getIdMarca()))
+                .findFirst().orElse(null);
+    }
 
 
 }

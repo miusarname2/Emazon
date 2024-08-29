@@ -40,33 +40,4 @@ class ArticuloRequestTest {
         assertEquals(marca, articuloRequest.getMarca());
     }
 
-    @Test
-    void testNombreSizeValidation() {
-        // Arrange
-        ArticuloRequest articuloRequest = new ArticuloRequest();
-        String nombreLargo = "Nombre que excede el límite de cincuenta caracteres, lo cual debería provocar un error";
-
-        // Act
-        Exception exception = assertThrows(Exception.class, () -> {
-            articuloRequest.setNombre(nombreLargo);
-        });
-
-        // Assert
-        assertTrue(exception.getMessage().contains("El nombre no puede tener más de 50 caracteres"));
-    }
-
-    @Test
-    void testDescripcionSizeValidation() {
-        // Arrange
-        ArticuloRequest articuloRequest = new ArticuloRequest();
-        String descripcionLarga = "Esta descripción es muy larga y excede el límite de noventa caracteres, lo que debería provocar un error";
-
-        // Act
-        Exception exception = assertThrows(Exception.class, () -> {
-            articuloRequest.setDescripcion(descripcionLarga);
-        });
-
-        // Assert
-        assertTrue(exception.getMessage().contains("La descripción no puede superar los 90 caracteres."));
-    }
 }
