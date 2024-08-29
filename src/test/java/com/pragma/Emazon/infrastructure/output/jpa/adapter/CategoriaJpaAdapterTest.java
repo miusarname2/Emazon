@@ -1,6 +1,7 @@
 package com.pragma.Emazon.infrastructure.output.jpa.adapter;
 
 import com.pragma.Emazon.domain.model.Categoria;
+import org.springframework.data.domain.*;
 import com.pragma.Emazon.infrastructure.exceptions.NoDataFound;
 import com.pragma.Emazon.infrastructure.output.jpa.entity.CategoriaEntity;
 import com.pragma.Emazon.infrastructure.output.jpa.mapper.CategoriaEntityMapper;
@@ -72,8 +73,9 @@ class CategoriaJpaAdapterTest {
         categoriaEntity2.setNombre("Hogar");
 
         List<CategoriaEntity> categoriaEntityList = Arrays.asList(categoriaEntity1, categoriaEntity2);
+        Page<CategoriaEntity> page = new PageImpl<>(categoriaEntityList, PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "nombre")), categoriaEntityList.size());
 
-        when(categoriaRepository.findAll()).thenReturn(categoriaEntityList);
+        when(categoriaRepository.findAll(any(Pageable.class))).thenReturn(page);
 
         Categoria categoria1 = new Categoria();
         categoria1.setNombre("Electrónica");
@@ -84,10 +86,10 @@ class CategoriaJpaAdapterTest {
         when(categoriaEntityMapper.toCategoriaList(categoriaEntityList)).thenReturn(Arrays.asList(categoria1, categoria2));
 
         // Act
-        List<Categoria> result = categoriaJpaAdapter.listCategorias();
+        List<Categoria> result = categoriaJpaAdapter.listCategorias("nombre", true, 0, 10);
 
         // Assert
-        verify(categoriaRepository).findAll();
+        verify(categoriaRepository).findAll(PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "nombre")));
         assertEquals(2, result.size());
         assertEquals("Electrónica", result.get(0).getNombre());
         assertEquals("Hogar", result.get(1).getNombre());
@@ -96,10 +98,12 @@ class CategoriaJpaAdapterTest {
     @Test
     void listCategorias_whenNoDataFound_throwsNoDataFoundException() {
         // Arrange
-        when(categoriaRepository.findAll()).thenReturn(Arrays.asList());
+        Page<CategoriaEntity> page = new PageImpl<>(Arrays.asList(), PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "nombre")), 0);
+
+        when(categoriaRepository.findAll(any(Pageable.class))).thenReturn(page);
 
         // Act & Assert
-        assertThrows(NoDataFound.class, () -> categoriaJpaAdapter.listCategorias());
+        assertThrows(NoDataFound.class, () -> categoriaJpaAdapter.listCategorias("nombre", true, 0, 10));
     }
 
 }

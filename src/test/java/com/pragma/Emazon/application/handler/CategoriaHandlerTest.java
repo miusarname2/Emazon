@@ -82,14 +82,14 @@ class CategoriaHandlerTest {
 
         List<CategoriaResponse> categoriaResponses = Arrays.asList(categoriaResponse1, categoriaResponse2);
 
-        when(categoriaPortService.listCategorias()).thenReturn(categorias);
+        when(categoriaPortService.listCategorias("nombre", true, 0, 10)).thenReturn(categorias);
         when(categoriaResponseMapper.toResponseList(categorias)).thenReturn(categoriaResponses);
 
         // Act
-        List<CategoriaResponse> result = categoriaHandler.listCategoria();
+        List<CategoriaResponse> result = categoriaHandler.listCategoria("nombre", true, 0, 10);
 
         // Assert
-        verify(categoriaPortService).listCategorias();
+        verify(categoriaPortService).listCategorias("nombre", true, 0, 10);
         verify(categoriaResponseMapper).toResponseList(categorias);
         assertEquals(categoriaResponses, result);
     }
