@@ -9,5 +9,5 @@ public interface IMarcaPersistence {
 
     Marca saveMarca(Marca marca);
 
-    List<Marca> listMarca();
+    List<Marca> listMarca(String sortBy, boolean ascending,int page, int size);
 }

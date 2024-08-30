@@ -21,7 +21,7 @@ public class MarcaUseCase implements IMarcaPortService {
     }
 
     @Override
-    public List<Marca> listMarca() {
-        return marcaPersistence.listMarca();
+    public List<Marca> listMarca(String sortBy, boolean ascending,int page, int size) {
+        return marcaPersistence.listMarca(sortBy,ascending,page,size);
     }
 }

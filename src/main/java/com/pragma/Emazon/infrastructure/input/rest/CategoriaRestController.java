@@ -12,7 +12,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+<<<<<<< HEAD
 import org.springframework.validation.annotation.Validated;
+=======
+>>>>>>> feature/H04
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

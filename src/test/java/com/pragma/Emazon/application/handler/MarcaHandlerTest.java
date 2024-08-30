@@ -69,6 +69,11 @@ class MarcaHandlerTest {
     @Test
     void listMarca() {
         // Arrange
+        String sortBy = "nombre";
+        boolean ascending = true;
+        int page = 0;
+        int size = 10;
+
         Marca marca = new Marca();
         marca.setNombre("Electrónica");
         marca.setDescripcion("Productos electrónicos");
@@ -77,18 +82,18 @@ class MarcaHandlerTest {
         marcaResponse.setNombre("Electrónica");
         marcaResponse.setDescripcion("Productos electrónicos");
 
-        when(marcaPortService.listMarca()).thenReturn(Collections.singletonList(marca));
+        when(marcaPortService.listMarca(sortBy, ascending, page, size))
+                .thenReturn(Collections.singletonList(marca));
         when(marcaResponseMapper.toResponseList(Collections.singletonList(marca)))
                 .thenReturn(Collections.singletonList(marcaResponse));
 
         // Act
-        List<MarcaResponse> responseList = marcaHandler.listMarca();
+        List<MarcaResponse> responseList = marcaHandler.listMarca(sortBy, ascending, page, size);
 
         // Assert
         assertEquals(1, responseList.size());
         assertEquals(marcaResponse, responseList.get(0));
-        verify(marcaPortService).listMarca();
+        verify(marcaPortService).listMarca(sortBy, ascending, page, size);
         verify(marcaResponseMapper).toResponseList(Collections.singletonList(marca));
     }
-
 }

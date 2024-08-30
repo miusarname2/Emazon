@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,8 +36,11 @@ public class MarcaRestController {
             content = @Content(mediaType = "application/json",
                     array = @ArraySchema(schema = @Schema(implementation = CategoriaResponse.class)))))
     @GetMapping
-    public ResponseEntity<List<MarcaResponse>> listMarca(){
-        return ResponseEntity.ok(marcaHandler.listMarca());
+    public ResponseEntity<List<MarcaResponse>> listMarca(@RequestParam(value = "sortBy", defaultValue = "id") String sortBy,
+                                                         @RequestParam(value = "ascending", defaultValue = "true") boolean ascending,
+                                                         @RequestParam(value = "page", defaultValue = "0") int page,
+                                                         @RequestParam(value = "size", defaultValue = "10") int size){
+        return ResponseEntity.ok(marcaHandler.listMarca(sortBy,ascending,page,size));
     }
 
 }

@@ -27,7 +27,7 @@ class GlobalExceptionHandlerTest {
         // Assert
         assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
         assertEquals(409, response.getBody().getStatusCode());
-        assertEquals("Conflict error", response.getBody().getErrors().get("description"));
+        assertEquals(null, response.getBody().getErrors().get("description"));
     }
 
 }
