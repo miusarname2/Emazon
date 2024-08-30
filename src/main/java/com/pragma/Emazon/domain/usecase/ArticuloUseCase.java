@@ -20,7 +20,7 @@ public class ArticuloUseCase implements IArticuloPortService {
     }
 
     @Override
-    public List<Articulo> listCategorias(String sortBy, boolean ascending,int page, int size) {
+    public List<Articulo> listArticulos(String sortBy, boolean ascending,int page, int size) {
         return articuloPersistence.listCategorias(sortBy,ascending,page,size);
     }
 }

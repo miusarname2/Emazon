@@ -41,7 +41,7 @@ public class ArticuloRestController {
             @ApiResponse(responseCode = "404", description = "No data found", content = @Content)
     })
     @GetMapping
-    public ResponseEntity<List<ArticuloResponse>> getAllCategorias(@RequestParam(value = "sortBy", defaultValue = "nombre") String sortBy,
+    public ResponseEntity<List<ArticuloResponse>> getAllCategorias(@RequestParam(value = "sortBy", defaultValue = "id") String sortBy,
                                                                    @RequestParam(value = "ascending", defaultValue = "true") boolean ascending,
                                                                    @RequestParam(value = "page", defaultValue = "0") int page,
                                                                    @RequestParam(value = "size", defaultValue = "10") int size){

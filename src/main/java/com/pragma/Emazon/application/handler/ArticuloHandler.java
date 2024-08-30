@@ -41,6 +41,11 @@ public class ArticuloHandler implements IArticuloHandler{
 
     @Override
     public List<ArticuloResponse> listArticulos(String sortBy, boolean ascending,int page, int size) {
-        return articuloResponseMapper.toListResponse(articuloPortService.listCategorias(sortBy,ascending,page,size),categoriaPortService.listCategorias(),marcaResponseMapper.toResponseList(marcaPortService.listMarca()));
+        articuloResponseMapper.toListResponse(
+                articuloPortService.listArticulos(sortBy, ascending, page, size),
+                categoriaPortService.listCategorias(sortBy,ascending,page,size),
+                marcaResponseMapper.toResponseList(marcaPortService.listMarca(sortBy,ascending,page,size))
+        );
+        return articuloResponseMapper.toListResponse(articuloPortService.listArticulos(sortBy,ascending,page,size),categoriaPortService.listCategorias(sortBy,ascending,page,size),marcaResponseMapper.toResponseList(marcaPortService.listMarca(sortBy,ascending,page,size)));
     }
 }

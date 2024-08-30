@@ -8,5 +8,5 @@ public interface IArticuloPortService {
 
     Articulo saveArticulo(Articulo articulo);
 
-    List<Articulo> listCategorias(String sortBy, boolean ascending,int page, int size);
+    List<Articulo> listArticulos(String sortBy, boolean ascending,int page, int size);
 }

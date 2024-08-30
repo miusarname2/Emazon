@@ -10,7 +10,7 @@ public interface IMarcaHandler {
 
     MarcaResponse saveMarca(MarcaRequest marcaRequest);
 
-    List<MarcaResponse> listMarca();
+    List<MarcaResponse> listMarca(String sortBy, boolean ascending,int page, int size);
 
     Marca obtenerMarca(Long id);
 

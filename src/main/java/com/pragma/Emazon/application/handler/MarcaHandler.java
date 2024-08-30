@@ -27,8 +27,8 @@ public class MarcaHandler implements IMarcaHandler{
     }
 
     @Override
-    public List<MarcaResponse> listMarca() {
-        return marcaResponseMapper.toResponseList(marcaPortService.listMarca());
+    public List<MarcaResponse> listMarca(String sortBy, boolean ascending,int page, int size) {
+        return marcaResponseMapper.toResponseList(marcaPortService.listMarca(sortBy,ascending,page,size));
     }
 
     @Override
