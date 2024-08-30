@@ -1,12 +1,17 @@
 package com.pragma.Emazon.infrastructure.configuration;
 
 import com.pragma.Emazon.domain.api.ICategoriaPortService;
+import com.pragma.Emazon.domain.api.IMarcaPortService;
 import com.pragma.Emazon.domain.spi.ICategoriaPersistence;
+import com.pragma.Emazon.domain.spi.IMarcaPersistence;
 import com.pragma.Emazon.domain.usecase.CategoriaUseCase;
+import com.pragma.Emazon.domain.usecase.MarcaUseCase;
 import com.pragma.Emazon.infrastructure.output.jpa.adapter.CategoriaJpaAdapter;
-import com.pragma.Emazon.infrastructure.output.jpa.entity.CategoriaEntity;
+import com.pragma.Emazon.infrastructure.output.jpa.adapter.MarcaJpaAdapter;
 import com.pragma.Emazon.infrastructure.output.jpa.mapper.CategoriaEntityMapper;
+import com.pragma.Emazon.infrastructure.output.jpa.mapper.MarcaEntityMapper;
 import com.pragma.Emazon.infrastructure.output.jpa.repository.ICategoriaRepository;
+import com.pragma.Emazon.infrastructure.output.jpa.repository.IMarcaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +22,8 @@ public class BeanConfiguration {
 
     private final ICategoriaRepository categoriaRepository;
     private final CategoriaEntityMapper categoriaEntityMapper;
+    private final IMarcaRepository marcaRepository;
+    private final MarcaEntityMapper marcaEntityMapper;
 
     @Bean
     public ICategoriaPersistence categoriaPersistencePort(){
@@ -26,6 +33,16 @@ public class BeanConfiguration {
     @Bean
     public ICategoriaPortService categoriaPortService(){
         return new CategoriaUseCase(categoriaPersistencePort());
+    }
+
+    @Bean
+    public IMarcaPersistence marcaPersistencePort(){
+        return new MarcaJpaAdapter(marcaRepository,marcaEntityMapper);
+    }
+
+    @Bean
+    public IMarcaPortService marcaPortService(){
+        return new MarcaUseCase(marcaPersistencePort());
     }
 
 }

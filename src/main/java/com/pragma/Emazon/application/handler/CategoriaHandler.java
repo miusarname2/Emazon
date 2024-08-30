@@ -27,7 +27,12 @@ public class CategoriaHandler implements ICategoriaHandler{
     }
 
     @Override
+<<<<<<< HEAD
     public List<CategoriaResponse> listCategoria(String sortBy, boolean ascending,int page, int size) {
         return categoriaResponseMapper.toResponseList(categoriaPortService.listCategorias(sortBy,ascending,page,size));
+=======
+    public List<CategoriaResponse> listCategoria() {
+        return categoriaResponseMapper.toResponseList(categoriaPortService.listCategorias());
+>>>>>>> feature/H03
     }
 }

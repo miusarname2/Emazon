@@ -26,8 +26,8 @@ public class CategoriaRestController {
 
     @Operation(summary = "Add a new categoria")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Pokemon created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Pokemon already exists", content = @Content)
+            @ApiResponse(responseCode = "201", description = "Categoria created", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Categoria already exists", content = @Content)
     })
     @PostMapping
     public ResponseEntity<Void> saveCategoria(@Validated @RequestBody CategoriaRequest categoriaRequest){
