@@ -47,6 +47,11 @@ class MarcaUseCaseTest {
     @Test
     void listMarca() {
         // Arrange
+        String sortBy = "nombre";
+        boolean ascending = true;
+        int page = 0;
+        int size = 10;
+
         Marca marca1 = new Marca();
         marca1.setNombre("Electrónica");
         marca1.setDescripcion("Productos electrónicos");
@@ -57,14 +62,13 @@ class MarcaUseCaseTest {
 
         List<Marca> marcas = Arrays.asList(marca1, marca2);
 
-        when(marcaPersistence.listMarca()).thenReturn(marcas);
+        when(marcaPersistence.listMarca(sortBy, ascending, page, size)).thenReturn(marcas);
 
         // Act
-        List<Marca> result = marcaUseCase.listMarca();
+        List<Marca> result = marcaUseCase.listMarca(sortBy, ascending, page, size);
 
         // Assert
         assertEquals(marcas, result, "La lista de marcas debería ser igual a la esperada.");
-        verify(marcaPersistence).listMarca();
+        verify(marcaPersistence).listMarca(sortBy, ascending, page, size);
     }
-
 }
