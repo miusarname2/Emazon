@@ -11,7 +11,6 @@ import java.util.List;
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface CategoriaEntityMapper {
- 
     CategoriaEntity toEntity(Categoria categoria);
 
     Categoria toCategoria(CategoriaEntity categoriaEntity);

@@ -1,9 +1,13 @@
 package com.pragma.Emazon.application.handler;
 
 import com.pragma.Emazon.application.dto.CategoriaRequest;
+<<<<<<< HEAD
 import com.pragma.Emazon.application.dto.CategoriaResponse;
 import com.pragma.Emazon.application.mapper.CategoriaRequestMapper;
 import com.pragma.Emazon.application.mapper.CategoriaResponseMapper;
+=======
+import com.pragma.Emazon.application.mapper.CategoriaRequestMapper;
+>>>>>>> feature/H06
 import com.pragma.Emazon.domain.api.ICategoriaPortService;
 import com.pragma.Emazon.domain.model.Categoria;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,9 +16,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+<<<<<<< HEAD
 import java.util.Arrays;
 import java.util.List;
 
+=======
+>>>>>>> feature/H06
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,9 +34,12 @@ class CategoriaHandlerTest {
     @Mock
     private CategoriaRequestMapper categoriaRequestMapper;
 
+<<<<<<< HEAD
     @Mock
     private CategoriaResponseMapper categoriaResponseMapper;
 
+=======
+>>>>>>> feature/H06
     @InjectMocks
     private CategoriaHandler categoriaHandler;
 

@@ -17,6 +17,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -35,5 +37,15 @@ public class ArticuloHandler implements IArticuloHandler{
         MarcaResponse marca = marcaResponseMapper.toResponse(marcaPortService.obtenerMarca(articuloRequest.getMarca().getId()));
         CategoriaResponse categoria = categoriaResponseMapper.toResponse(categoriaPortService.obtenerCategoria(articuloRequest.getCategoria().getId()));
         return articuloResponseMapper.toResponse(articuloPortService.saveArticulo(articuloRequestMapper.toArticulo(articuloRequest)),categoria,marca);
+    }
+
+    @Override
+    public List<ArticuloResponse> listArticulos(String sortBy, boolean ascending,int page, int size) {
+        articuloResponseMapper.toListResponse(
+                articuloPortService.listArticulos(sortBy, ascending, page, size),
+                categoriaPortService.listCategorias(sortBy,ascending,page,size),
+                marcaResponseMapper.toResponseList(marcaPortService.listMarca(sortBy,ascending,page,size))
+        );
+        return articuloResponseMapper.toListResponse(articuloPortService.listArticulos(sortBy,ascending,page,size),categoriaPortService.listCategorias(sortBy,ascending,page,size),marcaResponseMapper.toResponseList(marcaPortService.listMarca(sortBy,ascending,page,size)));
     }
 }

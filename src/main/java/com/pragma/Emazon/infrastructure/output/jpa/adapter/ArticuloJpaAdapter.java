@@ -9,6 +9,11 @@ import com.pragma.Emazon.infrastructure.output.jpa.repository.IArticuloRepositor
 import com.pragma.Emazon.infrastructure.output.jpa.repository.ICategoriaRepository;
 import com.pragma.Emazon.infrastructure.output.jpa.repository.IMarcaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 public class ArticuloJpaAdapter implements IArticuloPersistence {
@@ -24,5 +29,12 @@ public class ArticuloJpaAdapter implements IArticuloPersistence {
     public Articulo saveArticulo(Articulo articulo) {
 
         return articuloEntityMapper.toArticulo(articuloRepository.save(articuloEntityMapper.toEntity(articulo)));
+    }
+
+    @Override
+    public List<Articulo> listCategorias(String sortBy, boolean ascending,int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.fromString(ascending ? "ASC" : "DESC"), sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return articuloEntityMapper.toArticuloList(articuloRepository.findAll(pageable).getContent());
     }
 }
