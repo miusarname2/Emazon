@@ -7,6 +7,9 @@ import com.pragma.Emazon.infrastructure.output.jpa.entity.CategoriaEntity;
 import com.pragma.Emazon.infrastructure.output.jpa.mapper.CategoriaEntityMapper;
 import com.pragma.Emazon.infrastructure.output.jpa.repository.ICategoriaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -26,8 +29,10 @@ public class CategoriaJpaAdapter implements ICategoriaPersistence {
     }
 
     @Override
-    public List<Categoria> listCategorias() {
-        List<CategoriaEntity> categoriaList = categoriaRepository.findAll();
+    public List<Categoria> listCategorias(String sortBy, boolean ascending,int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.fromString(ascending ? "ASC" : "DESC"), sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+        List<CategoriaEntity> categoriaList = categoriaRepository.findAll(pageable).getContent();
         if (categoriaList.isEmpty()){
             throw new NoDataFound();
         }

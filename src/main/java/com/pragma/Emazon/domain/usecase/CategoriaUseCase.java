@@ -18,8 +18,8 @@ public class CategoriaUseCase implements ICategoriaPortService {
     }
 
     @Override
-    public List<Categoria> listCategorias() {
-        return categoriaPersistence.listCategorias();
+    public List<Categoria> listCategorias(String sortBy, boolean ascending,int page, int size) {
+        return categoriaPersistence.listCategorias(sortBy,ascending,page,size);
     }
 
     @Override

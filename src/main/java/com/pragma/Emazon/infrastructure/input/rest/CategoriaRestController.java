@@ -42,7 +42,10 @@ public class CategoriaRestController {
             @ApiResponse(responseCode = "404", description = "No data found", content = @Content)
     })
     @GetMapping
-    public ResponseEntity<List<CategoriaResponse>> getAllCategorias(){
-        return ResponseEntity.ok(categoriaHandler.listCategoria());
+    public ResponseEntity<List<CategoriaResponse>> getAllCategorias(@RequestParam(value = "sortBy", defaultValue = "id") String sortBy,
+                                                                    @RequestParam(value = "ascending", defaultValue = "true") boolean ascending,
+                                                                    @RequestParam(value = "page", defaultValue = "0") int page,
+                                                                    @RequestParam(value = "size", defaultValue = "10") int size){
+        return ResponseEntity.ok(categoriaHandler.listCategoria(sortBy,ascending,page,size));
     }
 }
