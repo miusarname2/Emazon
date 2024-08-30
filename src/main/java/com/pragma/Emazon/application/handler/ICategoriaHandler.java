@@ -12,4 +12,6 @@ public interface ICategoriaHandler {
 
     List<CategoriaResponse> listCategoria(String sortBy, boolean ascending,int page, int size);
 
+    Categoria obtenerCategoria(Long id);
+
 }

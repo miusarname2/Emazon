@@ -10,4 +10,6 @@ public interface ICategoriaPersistence {
 
     List<Categoria> listCategorias(String sortBy, boolean ascending,int page, int size);
 
+    Categoria obtenerCategoria(Long id);
+
 }

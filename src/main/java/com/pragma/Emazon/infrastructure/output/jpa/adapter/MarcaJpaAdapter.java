@@ -37,4 +37,9 @@ public class MarcaJpaAdapter implements IMarcaPersistence {
         }
         return marcaEntityMapper.toMarcaList(marcaEntities);
     }
+
+    @Override
+    public Marca obtenerMarca(Long id) {
+        return marcaEntityMapper.toMarca(marcaRepository.getById(id));
+    }
 }

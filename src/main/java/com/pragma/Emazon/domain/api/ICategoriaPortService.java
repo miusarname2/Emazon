@@ -10,4 +10,6 @@ public interface ICategoriaPortService {
 
     List<Categoria> listCategorias(String sortBy, boolean ascending,int page, int size);
 
+    Categoria obtenerCategoria(Long id);
+
 }

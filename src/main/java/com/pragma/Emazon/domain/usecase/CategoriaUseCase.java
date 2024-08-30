@@ -21,4 +21,9 @@ public class CategoriaUseCase implements ICategoriaPortService {
     public List<Categoria> listCategorias(String sortBy, boolean ascending,int page, int size) {
         return categoriaPersistence.listCategorias(sortBy,ascending,page,size);
     }
+
+    @Override
+    public Categoria obtenerCategoria(Long id) {
+        return categoriaPersistence.obtenerCategoria(id);
+    }
 }
