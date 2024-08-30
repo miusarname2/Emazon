@@ -16,4 +16,8 @@ public interface CategoriaEntityMapper {
     @Mapping(source = "nombre", target = "nombre")
     CategoriaEntity toEntity(Categoria categoria);
 
+    Categoria toCategoria(CategoriaEntity categoriaEntity);
+
+    List<Categoria> toCategoriaList(List<CategoriaEntity> categoriaEntityList);
+
 }

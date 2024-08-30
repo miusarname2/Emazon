@@ -10,6 +10,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -22,5 +24,10 @@ public class CategoriaHandler implements ICategoriaHandler{
     @Override
     public void saveCategoria(CategoriaRequest categoriaRequest) {
          categoriaPortService.saveCategoria(categoriaRequestMapper.toCategoria(categoriaRequest));
+    }
+
+    @Override
+    public List<CategoriaResponse> listCategoria(String sortBy, boolean ascending,int page, int size) {
+        return categoriaResponseMapper.toResponseList(categoriaPortService.listCategorias(sortBy,ascending,page,size));
     }
 }
