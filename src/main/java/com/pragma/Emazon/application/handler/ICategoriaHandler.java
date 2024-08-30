@@ -10,6 +10,6 @@ public interface ICategoriaHandler {
 
     void saveCategoria(CategoriaRequest categoriaRequest);
 
-    List<CategoriaResponse> listCategoria();
+    List<CategoriaResponse> listCategoria(String sortBy, boolean ascending,int page, int size);
 
 }
