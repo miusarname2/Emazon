@@ -20,10 +20,6 @@ public class ArticuloJpaAdapter implements IArticuloPersistence {
 
     private final IArticuloRepository articuloRepository;
     private final ArticuloEntityMapper articuloEntityMapper;
-    private final IMarcaRepository marcaRepository;
-    private final MarcaEntityMapper marcaEntityMapper;
-    private final ICategoriaRepository categoriaRepository;
-    private final CategoriaEntityMapper categoriaEntityMapper;
 
     @Override
     public Articulo saveArticulo(Articulo articulo) {
