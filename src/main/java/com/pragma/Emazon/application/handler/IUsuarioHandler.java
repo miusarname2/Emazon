@@ -1,9 +1,11 @@
 package com.pragma.Emazon.application.handler;
 
+import com.pragma.Emazon.application.dto.UsuarioRequest;
+import com.pragma.Emazon.application.dto.UsuarioResponse;
 import com.pragma.Emazon.domain.model.Usuario;
 
 public interface IUsuarioHandler {
 
-    Usuario saveUsuario(Usuario usuario);
+    UsuarioResponse saveUsuario(UsuarioRequest usuarioRequest);
 
 }

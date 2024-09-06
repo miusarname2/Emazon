@@ -5,7 +5,7 @@ import java.util.Date;
 public class Usuario {
 
     private Long id;
-    private String nomrbe;
+    private String nombre;
     private String apellido;
     private String correo;
     private String celular;
@@ -23,12 +23,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNomrbe() {
-        return nomrbe;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNomrbe(String nomrbe) {
-        this.nomrbe = nomrbe;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getApellido() {

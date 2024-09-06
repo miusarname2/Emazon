@@ -3,6 +3,8 @@ package com.pragma.Emazon.application.dto;
 import com.pragma.Emazon.application.validation.ValidClave;
 import com.pragma.Emazon.application.validation.ValidFechaNacimiento;
 import com.pragma.Emazon.application.validation.ValidPhoneNumber;
+import com.pragma.Emazon.domain.model.Rol;
+import com.pragma.Emazon.domain.model.TipoDocumento;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -39,4 +41,8 @@ public class UsuarioRequest {
     @NotBlank(message = "El documento no puede esta en blanco")
     @Size(max = 15,message = "El documento no puede tener más de 15 caracteres, ni menos de 1 caracter.")
     private String documento;
+
+    private Rol rol;
+
+    private TipoDocumento tipoDocumento;
 }

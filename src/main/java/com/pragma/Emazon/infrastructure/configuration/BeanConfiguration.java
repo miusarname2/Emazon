@@ -1,23 +1,11 @@
 package com.pragma.Emazon.infrastructure.configuration;
 
-import com.pragma.Emazon.domain.api.IArticuloPortService;
-import com.pragma.Emazon.domain.api.ICategoriaPortService;
-import com.pragma.Emazon.domain.api.IMarcaPortService;
-import com.pragma.Emazon.domain.spi.IArticuloPersistence;
-import com.pragma.Emazon.domain.spi.ICategoriaPersistence;
-import com.pragma.Emazon.domain.spi.IMarcaPersistence;
-import com.pragma.Emazon.domain.usecase.ArticuloUseCase;
-import com.pragma.Emazon.domain.usecase.CategoriaUseCase;
-import com.pragma.Emazon.domain.usecase.MarcaUseCase;
-import com.pragma.Emazon.infrastructure.output.jpa.adapter.ArticuloJpaAdapter;
-import com.pragma.Emazon.infrastructure.output.jpa.adapter.CategoriaJpaAdapter;
-import com.pragma.Emazon.infrastructure.output.jpa.adapter.MarcaJpaAdapter;
-import com.pragma.Emazon.infrastructure.output.jpa.mapper.ArticuloEntityMapper;
-import com.pragma.Emazon.infrastructure.output.jpa.mapper.CategoriaEntityMapper;
-import com.pragma.Emazon.infrastructure.output.jpa.mapper.MarcaEntityMapper;
-import com.pragma.Emazon.infrastructure.output.jpa.repository.IArticuloRepository;
-import com.pragma.Emazon.infrastructure.output.jpa.repository.ICategoriaRepository;
-import com.pragma.Emazon.infrastructure.output.jpa.repository.IMarcaRepository;
+import com.pragma.Emazon.domain.api.*;
+import com.pragma.Emazon.domain.spi.*;
+import com.pragma.Emazon.domain.usecase.*;
+import com.pragma.Emazon.infrastructure.output.jpa.adapter.*;
+import com.pragma.Emazon.infrastructure.output.jpa.mapper.*;
+import com.pragma.Emazon.infrastructure.output.jpa.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +20,12 @@ public class BeanConfiguration {
     private final MarcaEntityMapper marcaEntityMapper;
     private final IArticuloRepository articuloRepository;
     private final ArticuloEntityMapper articuloEntityMapper;
+    private final IUsuarioRepository usuarioRepository;
+    private final UsuarioEntityMapper usuarioEntityMapper;
+    private final IRolRepository rolRepository;
+    private final RolEntityMapper rolEntityMapper;
+    private final ITipoDocumentoRepository tipoDocumentoRepository;
+    private final TipoDocumentoEntityMapper tipoDocumentoEntityMapper;
 
     @Bean
     public ICategoriaPersistence categoriaPersistencePort(){
@@ -55,12 +49,42 @@ public class BeanConfiguration {
 
     @Bean
     public IArticuloPersistence articuloPersistencePort(){
-        return new ArticuloJpaAdapter(articuloRepository,articuloEntityMapper,marcaRepository,marcaEntityMapper,categoriaRepository,categoriaEntityMapper);
+        return new ArticuloJpaAdapter(articuloRepository,articuloEntityMapper);
     }
 
     @Bean
     public IArticuloPortService articuloPortService(){
         return new ArticuloUseCase(articuloPersistencePort());
+    }
+
+    @Bean
+    public IUsuarioPersistence usuarioPersistencePort(){
+        return new UsuarioJpaAdapter(usuarioRepository,usuarioEntityMapper);
+    }
+
+    @Bean
+    public IUsuarioPortService usuarioPortService(){
+        return new UsuarioUseCase(usuarioPersistencePort());
+    }
+
+    @Bean
+    public IRolPersistence rolPersistencePort(){
+        return new RolJpaAdapter(rolRepository,rolEntityMapper);
+    }
+
+    @Bean
+    public IRolPortService rolPortService(){
+        return new RolUseCase(rolPersistencePort());
+    }
+
+    @Bean
+    public ITipoDocumentoPersistence tipoDocumentoPersistencePort(){
+        return new TipoDocumentoJpaAdapter(tipoDocumentoRepository,tipoDocumentoEntityMapper);
+    }
+
+    @Bean
+    public ITipoDocumentoPortService tipoDocumentoPortService(){
+        return new TipoDocumentoUseCase(tipoDocumentoPersistencePort());
     }
 
 }

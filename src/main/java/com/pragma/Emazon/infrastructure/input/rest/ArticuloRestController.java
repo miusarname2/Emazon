@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class ArticuloRestController {
             @ApiResponse(responseCode = "201", description = "Marca created", content = @Content)
     })
     @PostMapping
-    public ResponseEntity<ArticuloResponse> saveArticulo(@RequestBody ArticuloRequest articuloRequest){
+    public ResponseEntity<ArticuloResponse> saveArticulo(@Validated @RequestBody ArticuloRequest articuloRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(articuloHandler.saveArticulo(articuloRequest));
     }
 
