@@ -1,7 +1,8 @@
 package com.pragma.Emazon.application.validation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Date;
