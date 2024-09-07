@@ -11,10 +11,12 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
 
 @Getter
+@Validated
 @Setter
 public class UsuarioRequest {
 
@@ -41,8 +43,6 @@ public class UsuarioRequest {
     @NotBlank(message = "El documento no puede esta en blanco")
     @Size(max = 15,message = "El documento no puede tener más de 15 caracteres, ni menos de 1 caracter.")
     private String documento;
-
-    private Rol rol;
 
     private TipoDocumento tipoDocumento;
 }

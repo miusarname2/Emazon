@@ -12,7 +12,6 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface UsuarioRequestMapper {
 
-    @Mapping(source = "usuarioRequest.rol.id",target = "id_rol")
     @Mapping(source = "usuarioRequest.tipoDocumento.id", target = "idTipoDocumento")
     Usuario toUsuario(UsuarioRequest usuarioRequest);
 

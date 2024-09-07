@@ -32,9 +32,11 @@ public class UsuarioHandler implements IUsuarioHandler{
 
     @Override
     public UsuarioResponse saveUsuario(UsuarioRequest usuarioRequest) {
-        RolResponse rolResponse = rolResponseMapper.toResponse(rolPortService.obtenerRol(usuarioRequest.getRol().getId()));
+        Usuario usuario = usuarioRequestMapper.toUsuario(usuarioRequest);
+        usuario.setId_rol(2L);
+        RolResponse rolResponse = rolResponseMapper.toResponse(rolPortService.obtenerRol(usuario.getId_rol()));
         TipoDocumentoResponse tipoDocumentoResponse = tipoDocumentoResponseMapper.toResponse(tipoDocumentoPortService.obtenerTipoDocumento(usuarioRequest.getTipoDocumento().getId()));
-        return usuarioResponseMapper.toResponse(usuarioPortService.saveUsuario(usuarioRequestMapper.toUsuario(usuarioRequest)),rolResponse,tipoDocumentoResponse);
+        return usuarioResponseMapper.toResponse(usuarioPortService.saveUsuario(usuario),rolResponse,tipoDocumentoResponse);
 
     }
 }
