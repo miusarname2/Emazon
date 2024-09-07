@@ -56,12 +56,15 @@ class UsuarioHandlerTest {
 
     @Test
     void saveUsuario(){
+        TipoDocumento documento = new TipoDocumento();
+        documento.setId(1L);
+
         // Arrange
         UsuarioRequest usuarioRequest = new UsuarioRequest();
         usuarioRequest.setNombre("Juan");
         usuarioRequest.setApellido("Pérez");
         usuarioRequest.setClave("Testing");
-
+        usuarioRequest.setTipoDocumento(documento);
 
 
         Usuario usuario = new Usuario();
