@@ -26,6 +26,10 @@ public class UsuarioRequest {
     @Size(min = 1, max = 50, message = "El apellido no puede tener más de 50 caracteres, ni menos de 1 caracter.")
     private String apellido;
 
+    @NotBlank
+    @Size(min = 1, max = 100, message = "El username no puede tener más de 100 caracteres, ni menos de 1 caracter.")
+    private String username;
+
     @Email(message = "El correo debe tener un formato válido")
     @NotBlank(message = "El correo no puede estar vacío")
     private String correo;

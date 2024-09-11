@@ -20,6 +20,7 @@ public class UsuarioEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+    private String username;
     private String apellido;
     private String correo;
     private String celular;

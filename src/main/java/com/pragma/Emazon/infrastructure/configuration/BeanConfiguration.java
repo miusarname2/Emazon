@@ -9,8 +9,11 @@ import com.pragma.Emazon.infrastructure.output.jpa.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -31,21 +34,10 @@ public class BeanConfiguration {
     private final ITipoDocumentoRepository tipoDocumentoRepository;
     private final TipoDocumentoEntityMapper tipoDocumentoEntityMapper;
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity)throws Exception{
-        httpSecurity.authorizeHttpRequests(req ->
-                req
-                        .requestMatchers("/api/**")
-                        .permitAll()
-                        .requestMatchers("/swagger-ui/**")
-                        .permitAll()
-                        .requestMatchers("/v3/api-docs/**").permitAll()
-                        .requestMatchers("/swagger-ui.html").permitAll()
-                )
-                .csrf(csrf->csrf.disable());
-
-        return httpSecurity.build();
-    }
+    //@Bean
+    //public JwtDecoder jwtDecoder() {
+    //    return JwtDecoders.fromIssuerLocation("https://dev-34mzyluwbwzfnauy.us.auth0.com/api/v2/");
+    //}
 
     @Bean
     public ICategoriaPersistence categoriaPersistencePort(){
