@@ -7,6 +7,7 @@ public class Usuario {
     private Long id;
     private String nombre;
     private String apellido;
+    private String username;
     private String correo;
     private String celular;
     private Date fecha_nacimiento;
@@ -93,5 +94,13 @@ public class Usuario {
 
     public void setId_rol(Long id_rol) {
         this.id_rol = id_rol;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

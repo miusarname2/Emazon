@@ -14,6 +14,7 @@ import com.pragma.Emazon.domain.api.IUsuarioPortService;
 import com.pragma.Emazon.domain.model.Usuario;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,11 +29,17 @@ public class UsuarioHandler implements IUsuarioHandler{
     private final RolResponseMapper rolResponseMapper;
     private final ITipoDocumentoPortService tipoDocumentoPortService;
     private final TipoDocumentoResponseMapper tipoDocumentoResponseMapper;
+    private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    protected static String encriptarPassword(String password) {
+        return passwordEncoder.encode(password);
+    }
 
     @Override
     public UsuarioResponse saveUsuario(UsuarioRequest usuarioRequest) {
         Usuario usuario = usuarioRequestMapper.toUsuario(usuarioRequest);
+        String hashedPassword = encriptarPassword(usuario.getClave());
+        usuario.setClave(hashedPassword);
         usuario.setId_rol(2L);
         RolResponse rolResponse = rolResponseMapper.toResponse(rolPortService.obtenerRol(usuario.getId_rol()));
         TipoDocumentoResponse tipoDocumentoResponse = tipoDocumentoResponseMapper.toResponse(tipoDocumentoPortService.obtenerTipoDocumento(usuarioRequest.getTipoDocumento().getId()));

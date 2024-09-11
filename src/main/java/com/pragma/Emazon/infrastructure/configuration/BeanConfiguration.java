@@ -9,8 +9,15 @@ import com.pragma.Emazon.infrastructure.output.jpa.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtDecoders;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 @RequiredArgsConstructor
 public class BeanConfiguration {
 
@@ -26,6 +33,11 @@ public class BeanConfiguration {
     private final RolEntityMapper rolEntityMapper;
     private final ITipoDocumentoRepository tipoDocumentoRepository;
     private final TipoDocumentoEntityMapper tipoDocumentoEntityMapper;
+
+    //@Bean
+    //public JwtDecoder jwtDecoder() {
+    //    return JwtDecoders.fromIssuerLocation("https://dev-34mzyluwbwzfnauy.us.auth0.com/api/v2/");
+    //}
 
     @Bean
     public ICategoriaPersistence categoriaPersistencePort(){
