@@ -46,38 +46,22 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(http -> {
                     // EndPoints publicos
-                    http.requestMatchers("/api/**").authenticated()
-                            .requestMatchers("/swagger-ui/**").permitAll()
+                    http.requestMatchers("/swagger-ui/**").permitAll()
                             .requestMatchers("/auth/**").permitAll()
                             .requestMatchers("/v3/api-docs/**").permitAll()
                             .requestMatchers("/swagger-ui.html").permitAll()
+                            .requestMatchers(HttpMethod.POST,"/api/categoria").hasAnyAuthority("ROLE_admin")
+                            .requestMatchers(HttpMethod.GET,"/api/categoria").authenticated()
+                            .requestMatchers(HttpMethod.POST,"/api/marca").hasAnyAuthority("ROLE_admin")
+                            .requestMatchers(HttpMethod.GET,"/api/marca").authenticated()
+                            .requestMatchers(HttpMethod.POST,"/api/articulo").hasAnyAuthority("ROLE_admin")
+                            .requestMatchers(HttpMethod.GET,"/api/articulo").authenticated()
+                            .requestMatchers(HttpMethod.POST,"api/Usuario/crearAuxiliarBodega").hasAnyAuthority("ROLE_admin")
                             .anyRequest().authenticated();
                 })
                 .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class)
                 .build();
     }
-    // public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-    //     httpSecurity.authorizeHttpRequests(req ->
-    //                     req
-    //                             .requestMatchers("/api/**")
-    //                             .hasAnyAuthority("ROLE_aux_bodega")
-    //                             .requestMatchers("/swagger-ui/**").permitAll()
-    //                             .requestMatchers("/auth/**").permitAll()
-    //                             .requestMatchers("/v3/api-docs/**").permitAll()
-    //                             .requestMatchers("/swagger-ui.html").permitAll()
-    //                             .anyRequest().authenticated()
-    //             )
-    //             .oauth2ResourceServer(oauth2 -> oauth2
-    //                     .jwt(jwt -> jwt
-    //                             .jwtAuthenticationConverter(jwtAuthenticationConverter())
-    //                     )
-    //             )
-    //             .csrf(csrf -> csrf.disable());
-
-    //     //httpSecurity.addFilterBefore(JwtTokenValidator, org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter.class);
-
-    //     return httpSecurity.build();
-    // }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
