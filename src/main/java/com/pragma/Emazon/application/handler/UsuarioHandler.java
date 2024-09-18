@@ -46,4 +46,15 @@ public class UsuarioHandler implements IUsuarioHandler{
         return usuarioResponseMapper.toResponse(usuarioPortService.saveUsuario(usuario),rolResponse,tipoDocumentoResponse);
 
     }
+
+    @Override
+    public UsuarioResponse crearUsuarioCliente(UsuarioRequest usuarioRequest) {
+        Usuario usuario = usuarioRequestMapper.toUsuario(usuarioRequest);
+        String hashedPassword = encriptarPassword(usuario.getClave());
+        usuario.setClave(hashedPassword);
+        usuario.setId_rol(3L);
+        RolResponse rolResponse = rolResponseMapper.toResponse(rolPortService.obtenerRol(usuario.getId_rol()));
+        TipoDocumentoResponse tipoDocumentoResponse = tipoDocumentoResponseMapper.toResponse(tipoDocumentoPortService.obtenerTipoDocumento(usuarioRequest.getTipoDocumento().getId()));
+        return usuarioResponseMapper.toResponse(usuarioPortService.saveUsuario(usuario),rolResponse,tipoDocumentoResponse);
+    }
 }
