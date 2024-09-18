@@ -8,4 +8,6 @@ public interface IUsuarioHandler {
 
     UsuarioResponse saveUsuario(UsuarioRequest usuarioRequest);
 
+    UsuarioResponse crearUsuarioCliente(UsuarioRequest usuarioRequest);
+
 }

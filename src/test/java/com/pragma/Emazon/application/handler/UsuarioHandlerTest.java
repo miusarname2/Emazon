@@ -55,7 +55,7 @@ class UsuarioHandlerTest {
     }
 
     @Test
-    void saveUsuario(){
+    void saveUsuario() {
         TipoDocumento documento = new TipoDocumento();
         documento.setId(1L);
 
@@ -63,14 +63,14 @@ class UsuarioHandlerTest {
         UsuarioRequest usuarioRequest = new UsuarioRequest();
         usuarioRequest.setNombre("Juan");
         usuarioRequest.setApellido("Pérez");
-        usuarioRequest.setClave("Testing");
+        usuarioRequest.setClave("Testing123");
         usuarioRequest.setTipoDocumento(documento);
-
 
         Usuario usuario = new Usuario();
         usuario.setNombre("Juan");
         usuario.setApellido("Pérez");
         usuario.setId_rol(2L);
+        usuario.setClave("HashedPassword");  // Contraseña encriptada simulada
 
         RolResponse rolResponse = new RolResponse();
         rolResponse.setNombre("Usuario");
@@ -90,8 +90,8 @@ class UsuarioHandlerTest {
         when(usuarioRequestMapper.toUsuario(usuarioRequest)).thenReturn(usuario);
         when(rolPortService.obtenerRol(2L)).thenReturn(new Rol());
         when(rolResponseMapper.toResponse(any())).thenReturn(rolResponse);
-        when(tipoDocumentoPortService.obtenerTipoDocumento(anyLong())).thenReturn(tipoDocumento);  // Corregido aquí
-        when(tipoDocumentoResponseMapper.toResponse(tipoDocumento)).thenReturn(tipoDocumentoResponse); // Corregido aquí
+        when(tipoDocumentoPortService.obtenerTipoDocumento(anyLong())).thenReturn(tipoDocumento);
+        when(tipoDocumentoResponseMapper.toResponse(tipoDocumento)).thenReturn(tipoDocumentoResponse);
         when(usuarioPortService.saveUsuario(usuario)).thenReturn(usuario);
         when(usuarioResponseMapper.toResponse(usuario, rolResponse, tipoDocumentoResponse)).thenReturn(usuarioResponse);
 
@@ -103,10 +103,64 @@ class UsuarioHandlerTest {
         verify(usuarioRequestMapper).toUsuario(usuarioRequest);
         verify(rolPortService).obtenerRol(2L);
         verify(rolResponseMapper).toResponse(any());
-        verify(tipoDocumentoPortService).obtenerTipoDocumento(anyLong());  // Corregido aquí
-        verify(tipoDocumentoResponseMapper).toResponse(tipoDocumento);    // Corregido aquí
+        verify(tipoDocumentoPortService).obtenerTipoDocumento(anyLong());
+        verify(tipoDocumentoResponseMapper).toResponse(tipoDocumento);
         verify(usuarioPortService).saveUsuario(usuario);
         verify(usuarioResponseMapper).toResponse(usuario, rolResponse, tipoDocumentoResponse);
     }
 
+    @Test
+    void crearUsuarioCliente() {
+        TipoDocumento documento = new TipoDocumento();
+        documento.setId(1L);
+
+        // Arrange
+        UsuarioRequest usuarioRequest = new UsuarioRequest();
+        usuarioRequest.setNombre("Carlos");
+        usuarioRequest.setApellido("Lopez");
+        usuarioRequest.setClave("ClientPass123");
+        usuarioRequest.setTipoDocumento(documento);
+
+        Usuario usuario = new Usuario();
+        usuario.setNombre("Carlos");
+        usuario.setApellido("Lopez");
+        usuario.setId_rol(3L);
+        usuario.setClave("HashedClientPassword");  // Contraseña encriptada simulada
+
+        RolResponse rolResponse = new RolResponse();
+        rolResponse.setNombre("Cliente");
+
+        TipoDocumento tipoDocumento = new TipoDocumento();
+        tipoDocumento.setNombre("Cédula");
+
+        TipoDocumentoResponse tipoDocumentoResponse = new TipoDocumentoResponse();
+        tipoDocumentoResponse.setNombre("Cédula");
+
+        UsuarioResponse usuarioResponse = new UsuarioResponse();
+        usuarioResponse.setNombre("Carlos");
+        usuarioResponse.setApellido("Lopez");
+        usuarioResponse.setRol(rolResponse);
+        usuarioResponse.setTipoDocumentoResponse(tipoDocumentoResponse);
+
+        when(usuarioRequestMapper.toUsuario(usuarioRequest)).thenReturn(usuario);
+        when(rolPortService.obtenerRol(3L)).thenReturn(new Rol());
+        when(rolResponseMapper.toResponse(any())).thenReturn(rolResponse);
+        when(tipoDocumentoPortService.obtenerTipoDocumento(anyLong())).thenReturn(tipoDocumento);
+        when(tipoDocumentoResponseMapper.toResponse(tipoDocumento)).thenReturn(tipoDocumentoResponse);
+        when(usuarioPortService.saveUsuario(usuario)).thenReturn(usuario);
+        when(usuarioResponseMapper.toResponse(usuario, rolResponse, tipoDocumentoResponse)).thenReturn(usuarioResponse);
+
+        // Act
+        UsuarioResponse response = usuarioHandler.crearUsuarioCliente(usuarioRequest);
+
+        // Assert
+        assertEquals(usuarioResponse, response);
+        verify(usuarioRequestMapper).toUsuario(usuarioRequest);
+        verify(rolPortService).obtenerRol(3L);
+        verify(rolResponseMapper).toResponse(any());
+        verify(tipoDocumentoPortService).obtenerTipoDocumento(anyLong());
+        verify(tipoDocumentoResponseMapper).toResponse(tipoDocumento);
+        verify(usuarioPortService).saveUsuario(usuario);
+        verify(usuarioResponseMapper).toResponse(usuario, rolResponse, tipoDocumentoResponse);
+    }
 }
