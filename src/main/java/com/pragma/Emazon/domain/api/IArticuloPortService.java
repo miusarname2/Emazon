@@ -9,4 +9,6 @@ public interface IArticuloPortService {
     Articulo saveArticulo(Articulo articulo);
 
     List<Articulo> listArticulos(String sortBy, boolean ascending,int page, int size);
+
+    Articulo agregarArticuloAlStock(String nombreArticulo,int cantidad);
 }

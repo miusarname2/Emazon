@@ -23,4 +23,11 @@ public class ArticuloUseCase implements IArticuloPortService {
     public List<Articulo> listArticulos(String sortBy, boolean ascending,int page, int size) {
         return articuloPersistence.listCategorias(sortBy,ascending,page,size);
     }
+
+    @Override
+    public Articulo agregarArticuloAlStock(String nombreArticulo, int cantidad) {
+        Articulo articulo = articuloPersistence.obtenerArticulo(nombreArticulo);
+        articulo.setCantidad(cantidad + articulo.getCantidad());
+        return articuloPersistence.agregarArticuloAlStock(articulo);
+    }
 }
