@@ -1,5 +1,6 @@
 package com.pragma.Emazon.infrastructure.input.rest;
 
+import com.pragma.Emazon.application.dto.AddArticuloRequest;
 import com.pragma.Emazon.application.dto.ArticuloRequest;
 import com.pragma.Emazon.application.dto.ArticuloResponse;
 import com.pragma.Emazon.application.dto.CategoriaResponse;
@@ -49,6 +50,11 @@ public class ArticuloRestController {
                                                                    @RequestParam(value = "page", defaultValue = "0") int page,
                                                                    @RequestParam(value = "size", defaultValue = "10") int size){
         return ResponseEntity.ok(articuloHandler.listArticulos(sortBy, ascending,page,size));
+    }
+
+    @PostMapping("AgregarCantidadAlStock")
+    public ResponseEntity<ArticuloResponse> agregarArticuloAlStock(@Validated @RequestBody AddArticuloRequest articuloRequest){
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(articuloHandler.agregarArticulosAlStock(articuloRequest));
     }
 
 }
