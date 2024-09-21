@@ -58,7 +58,7 @@ public class SecurityConfig {
                             .requestMatchers(HttpMethod.GET,"/api/articulo").authenticated()
                             .requestMatchers(HttpMethod.POST,"/api/articulo/AgregarCantidadAlStock").hasAnyAuthority("ROLE_admin","ROLE_aux_bodega")
                             .requestMatchers(HttpMethod.POST,"api/Usuario/crearAuxiliarBodega").hasAnyAuthority("ROLE_admin")
-
+                            .requestMatchers(HttpMethod.POST,"api/Usuario/CrearUsuarioCliente").permitAll()
                             .anyRequest().authenticated();
                 })
                 .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class)

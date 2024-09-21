@@ -73,5 +73,4 @@ public interface ArticuloResponseMapper {
                 .findFirst().orElse(null);
     }
 
-
 }
