@@ -5,6 +5,7 @@ import com.pragma.Emazon.domain.spi.ICarritoPersistence;
 import com.pragma.Emazon.infrastructure.output.jpa.entity.CarritoEntity;
 import com.pragma.Emazon.infrastructure.output.jpa.mapper.CarritoEntityMapper;
 import com.pragma.Emazon.infrastructure.output.jpa.repository.ICarritoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
@@ -42,6 +43,22 @@ public class CarritoJpaAdapter implements ICarritoPersistence {
             // Haz algo con el carrito
         } else {
             return carritoEntityMapper.toCarrito(carritoRepository.save(carritoEntityMapper.toEntity(carrito)));
+        }
+    }
+
+    @Override
+    public Carrito deleteCarrito(Carrito carrito) {
+        Optional<CarritoEntity> carritoOpcional = carritoRepository.findByIdArticuloAndIdUsuario(carrito.getId_articulo(), carrito.getId_usuario());
+
+        if (carritoOpcional.isPresent()) {
+            // Carrito encontrado
+            CarritoEntity carritoEntity = carritoOpcional.get();
+            carritoEntity.setCantidad(carrito.getCantidad());
+            carritoRepository.delete(carritoEntity);
+            return carritoEntityMapper.toCarrito(carritoEntity);
+            // Haz algo con el carrito
+        } else {
+            throw new EntityNotFoundException("No encontre el Carrito.");
         }
     }
 }

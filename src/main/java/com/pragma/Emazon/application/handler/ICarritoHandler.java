@@ -10,4 +10,6 @@ public interface ICarritoHandler {
 
     CarritoResponse updatCarrito(CarritoRequest carrito);
 
+    CarritoResponse deleteCarrito(CarritoRequest carrito);
+
 }

@@ -40,4 +40,11 @@ public class CarritoHandler implements ICarritoHandler {
         ArticuloResponse articuloResponse = articuloHandler.obtenerArticuloPorId(carrito.getId_articulo());
         return carritoResponseMapper.toResponse(carritoActual,usuarioResponse,articuloResponse);
     }
+
+    @Override
+    public CarritoResponse deleteCarrito(CarritoRequest carrito) {
+        UsuarioResponse usuarioResponse = usuarioHandler.obtenerUsuarioPorId(carrito.getId_usuario());
+        ArticuloResponse articuloResponse = articuloHandler.obtenerArticuloPorId(carrito.getId_articulo());
+        return carritoResponseMapper.toResponse(carritoPortService.deleteCarrito(carritoRequestMapper.toCarrito(carrito)),usuarioResponse,articuloResponse);
+    }
 }

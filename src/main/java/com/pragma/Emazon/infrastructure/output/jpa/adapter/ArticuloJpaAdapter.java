@@ -26,7 +26,6 @@ public class ArticuloJpaAdapter implements IArticuloPersistence {
 
     @Override
     public Articulo saveArticulo(Articulo articulo) {
-
         return articuloEntityMapper.toArticulo(articuloRepository.save(articuloEntityMapper.toEntity(articulo)));
     }
 

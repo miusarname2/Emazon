@@ -8,4 +8,6 @@ public interface ICarritoPortService {
 
     Carrito updatCarrito(Carrito carrito);
 
+    Carrito deleteCarrito(Carrito carrito);
+
 }

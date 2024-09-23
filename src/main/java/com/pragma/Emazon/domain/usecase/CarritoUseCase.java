@@ -21,4 +21,9 @@ public class CarritoUseCase implements ICarritoPortService {
     public Carrito updatCarrito(Carrito carrito) {
         return carritoPersistence.updatCarrito(carrito);
     }
+
+    @Override
+    public Carrito deleteCarrito(Carrito carrito) {
+        return carritoPersistence.deleteCarrito(carrito);
+    }
 }

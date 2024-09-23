@@ -8,4 +8,6 @@ public interface ICarritoPersistence {
 
     Carrito updatCarrito(Carrito carrito);
 
+    Carrito deleteCarrito(Carrito carrito);
+
 }
