@@ -1,5 +1,6 @@
 package com.pragma.Emazon.domain.usecase;
 
+import com.pragma.Emazon.application.dto.ArticuloResponse;
 import com.pragma.Emazon.domain.api.IArticuloPortService;
 import com.pragma.Emazon.domain.model.Articulo;
 import com.pragma.Emazon.domain.spi.IArticuloPersistence;
@@ -30,4 +31,10 @@ public class ArticuloUseCase implements IArticuloPortService {
         articulo.setCantidad(cantidad + articulo.getCantidad());
         return articuloPersistence.agregarArticuloAlStock(articulo);
     }
+
+    @Override
+    public Articulo obtenerArticuloPorId(Long id) {
+        return articuloPersistence.obtenerArticuloPorId(id);
+    }
+
 }

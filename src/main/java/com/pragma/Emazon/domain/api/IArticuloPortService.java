@@ -1,5 +1,6 @@
 package com.pragma.Emazon.domain.api;
 
+import com.pragma.Emazon.application.dto.ArticuloResponse;
 import com.pragma.Emazon.domain.model.Articulo;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface IArticuloPortService {
     List<Articulo> listArticulos(String sortBy, boolean ascending,int page, int size);
 
     Articulo agregarArticuloAlStock(String nombreArticulo,int cantidad);
+
+    Articulo obtenerArticuloPorId(Long id);
 }

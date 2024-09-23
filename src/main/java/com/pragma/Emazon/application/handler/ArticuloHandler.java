@@ -54,4 +54,12 @@ public class ArticuloHandler implements IArticuloHandler{
         CategoriaResponse categoria = categoriaResponseMapper.toResponse(categoriaPortService.obtenerCategoria(articulo.getIdCategoria()));
         return articuloResponseMapper.toResponse(articulo,categoria,marca);
     }
+
+    @Override
+    public ArticuloResponse obtenerArticuloPorId(Long id) {
+        Articulo articulo = articuloPortService.obtenerArticuloPorId(id);
+        MarcaResponse marca = marcaResponseMapper.toResponse(marcaPortService.obtenerMarca(articulo.getIdMarca()));
+        CategoriaResponse categoria = categoriaResponseMapper.toResponse(categoriaPortService.obtenerCategoria(articulo.getIdCategoria()));
+        return articuloResponseMapper.toResponse(articulo,categoria,marca);
+    }
 }

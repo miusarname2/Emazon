@@ -14,4 +14,6 @@ public interface IArticuloHandler {
     List<ArticuloResponse> listArticulos(String sortBy, boolean ascending,int page, int size);
 
     ArticuloResponse agregarArticulosAlStock(AddArticuloRequest articuloRequest);
+
+    ArticuloResponse obtenerArticuloPorId(Long id);
 }

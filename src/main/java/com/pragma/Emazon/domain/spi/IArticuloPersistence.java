@@ -14,4 +14,6 @@ public interface IArticuloPersistence {
     Articulo obtenerArticulo(String articuloNombre);
 
     Articulo agregarArticuloAlStock(Articulo articulo);
+
+    Articulo obtenerArticuloPorId(Long id);
 }

@@ -10,4 +10,6 @@ public interface IUsuarioHandler {
 
     UsuarioResponse crearUsuarioCliente(UsuarioRequest usuarioRequest);
 
+    UsuarioResponse obtenerUsuarioPorId(Long id);
+
 }

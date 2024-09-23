@@ -16,4 +16,9 @@ public class UsuarioUseCase implements IUsuarioPortService {
     public Usuario saveUsuario(Usuario usuario) {
         return usuarioPersistence.saveUsuario(usuario);
     }
+
+    @Override
+    public Usuario obtenerUsuarioPorId(Long id) {
+        return usuarioPersistence.obtenerUsuarioPorId(id);
+    }
 }

@@ -33,6 +33,8 @@ public class BeanConfiguration {
     private final RolEntityMapper rolEntityMapper;
     private final ITipoDocumentoRepository tipoDocumentoRepository;
     private final TipoDocumentoEntityMapper tipoDocumentoEntityMapper;
+    private final ICarritoRepository carritoRepository;
+    private final CarritoEntityMapper carritoEntityMapper;
 
     //@Bean
     //public JwtDecoder jwtDecoder() {
@@ -97,6 +99,16 @@ public class BeanConfiguration {
     @Bean
     public ITipoDocumentoPortService tipoDocumentoPortService(){
         return new TipoDocumentoUseCase(tipoDocumentoPersistencePort());
+    }
+
+    @Bean
+    public ICarritoPersistence carritoPersistencePort(){
+        return new CarritoJpaAdapter(carritoRepository,carritoEntityMapper);
+    }
+
+    @Bean
+    public ICarritoPortService carritoPortService(){
+        return new CarritoUseCase(carritoPersistencePort());
     }
 
 }
