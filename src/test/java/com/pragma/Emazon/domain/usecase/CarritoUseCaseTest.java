@@ -58,4 +58,21 @@ class CarritoUseCaseTest {
         assertEquals(carrito, result);
     }
 
+    @Test
+    void deleteCarrito() {
+        // Arrange
+        Carrito carrito = new Carrito();
+        carrito.setId(1L);
+
+        // Mock the behavior of carritoPersistence
+        when(carritoPersistence.deleteCarrito(carrito)).thenReturn(carrito);
+
+        // Act
+        Carrito result = carritoUseCase.deleteCarrito(carrito);
+
+        // Assert
+        verify(carritoPersistence).deleteCarrito(carrito);
+        assertEquals(carrito, result);
+    }
+
 }
