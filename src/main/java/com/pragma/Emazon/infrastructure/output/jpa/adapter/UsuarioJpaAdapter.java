@@ -16,4 +16,9 @@ public class UsuarioJpaAdapter implements IUsuarioPersistence {
     public Usuario saveUsuario(Usuario usuario) {
         return usuarioEntityMapper.toUsuario(usuarioRepository.save(usuarioEntityMapper.toEntity(usuario)));
     }
+
+    @Override
+    public Usuario obtenerUsuarioPorId(Long id) {
+        return usuarioEntityMapper.toUsuario(usuarioRepository.getById(id));
+    }
 }

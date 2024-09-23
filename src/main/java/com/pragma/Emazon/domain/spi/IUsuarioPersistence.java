@@ -6,4 +6,6 @@ public interface IUsuarioPersistence {
 
     Usuario saveUsuario(Usuario usuario);
 
+    Usuario obtenerUsuarioPorId(Long id);
+
 }

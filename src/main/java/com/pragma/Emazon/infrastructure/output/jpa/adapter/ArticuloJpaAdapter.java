@@ -47,4 +47,9 @@ public class ArticuloJpaAdapter implements IArticuloPersistence {
     public Articulo agregarArticuloAlStock(Articulo articulo) {
         return articuloEntityMapper.toArticulo(articuloRepository.save(articuloEntityMapper.toEntity(articulo)));
     }
+
+    @Override
+    public Articulo obtenerArticuloPorId(Long id) {
+        return articuloEntityMapper.toArticulo(articuloRepository.getById(id));
+    }
 }
