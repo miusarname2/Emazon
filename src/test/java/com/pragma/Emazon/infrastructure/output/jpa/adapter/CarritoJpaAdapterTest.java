@@ -10,7 +10,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -158,5 +163,42 @@ class CarritoJpaAdapterTest {
         // Act & Assert
         assertThrows(EntityNotFoundException.class, () -> carritoJpaAdapter.deleteCarrito(carrito));
     }
+
+    @Test
+    void getAllCarrito_returnsSortedAndPagedList() {
+        // Arrange
+        String sortBy = "id";
+        boolean ascending = true;
+        int page = 0;
+        int size = 10;
+        Long idUsuario = 1L;
+
+        CarritoEntity carritoEntity1 = new CarritoEntity();
+        carritoEntity1.setId(1L);
+        carritoEntity1.setCantidad(5);
+
+        CarritoEntity carritoEntity2 = new CarritoEntity();
+        carritoEntity2.setId(2L);
+        carritoEntity2.setCantidad(10);
+
+        List<CarritoEntity> carritoEntities = Arrays.asList(carritoEntity1, carritoEntity2);
+
+        Page<CarritoEntity> carritoPage = new PageImpl<>(carritoEntities);
+
+        when(carritoRepository.findByIdUsuario(eq(idUsuario), any(Pageable.class))).thenReturn(carritoPage);
+        Carrito carrito1 = new Carrito();
+        Carrito carrito2 = new Carrito();
+        when(carritoEntityMapper.toCarrito(carritoEntity1)).thenReturn(carrito1);
+        when(carritoEntityMapper.toCarrito(carritoEntity2)).thenReturn(carrito2);
+        carrito1.setCantidad(1L);
+        carrito2.setCantidad(2L);
+
+        // Act
+        List<Carrito> result = carritoJpaAdapter.GetAllCarrito(sortBy, ascending, page, size, idUsuario);
+
+        // Assert
+        assertEquals(2, result.size());
+    }
+
 
 }

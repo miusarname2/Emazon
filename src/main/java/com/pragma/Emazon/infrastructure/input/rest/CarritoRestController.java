@@ -1,9 +1,6 @@
 package com.pragma.Emazon.infrastructure.input.rest;
 
-import com.pragma.Emazon.application.dto.ArticuloResponse;
-import com.pragma.Emazon.application.dto.CarritoRequest;
-import com.pragma.Emazon.application.dto.CarritoResponse;
-import com.pragma.Emazon.application.dto.CarritoToDeleteRequest;
+import com.pragma.Emazon.application.dto.*;
 import com.pragma.Emazon.application.handler.ICarritoHandler;
 import com.pragma.Emazon.application.mapper.CarritoRequestMapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -56,6 +55,22 @@ public class CarritoRestController {
     @DeleteMapping
     public ResponseEntity<CarritoResponse> deleteCarrito(@Validated @RequestBody CarritoToDeleteRequest carritoRequest){
         return ResponseEntity.status(HttpStatus.OK).body(carritoHandler.deleteCarrito(carritoRequestMapper.toCarritoRequest(carritoRequest)));
+    }
+
+    @Operation(summary = "Get all Carrito")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "The trolleys were obtained",
+                    content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = CarritoResponse.class)))),
+            @ApiResponse(responseCode = "404", description = "No data found", content = @Content)
+    })
+    @GetMapping
+    public ResponseEntity<CarritoListResponse> obtenerCarrito(@RequestParam(value = "sortBy", defaultValue = "id") String sortBy,
+                                                              @RequestParam(value = "ascending", defaultValue = "true") boolean ascending,
+                                                              @RequestParam(value = "page", defaultValue = "0") int page,
+                                                              @RequestParam(value = "idUsuario",defaultValue = "0") Long id,
+                                                              @RequestParam(value = "size", defaultValue = "10") int size){
+        return ResponseEntity.status(HttpStatus.OK).body(carritoHandler.GetAllCarrito(sortBy,ascending,page,size,id));
     }
 
 }
